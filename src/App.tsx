@@ -97,6 +97,14 @@ function App() {
           </>
         )}
       </div>
+      {rounds.length > 0 && (
+        <button
+          className="px-4 py-2 text-xs  transition-all text-gray-800/80 hover:-translate-y-0.5 hover:bg-slate-100/50 font-bold uppercase rounded-md m-4 select-none"
+          onClick={() => setRounds([])}
+        >
+          Wyjście
+        </button>
+      )}
     </>
   );
 }

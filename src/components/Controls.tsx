@@ -16,7 +16,7 @@ const Controls = ({
   return (
     <div>
       <button
-        className={`px-4 py-2 text-sm transition-all text-gray-800 hover:-translate-y-0.5 font-bold uppercase rounded-md m-4 select-none ${
+        className={`px-4 py-2 text-sm transition-all text-gray-800 hover:-translate-y-0.5 font-bold uppercase m-4 select-none ${
           currentRound <= 1 || buttonsDisabled ? "disabled" : undefined
         }`}
         disabled={currentRound <= 1 || buttonsDisabled}
