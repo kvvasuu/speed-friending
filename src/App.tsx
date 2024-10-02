@@ -38,6 +38,8 @@ function App() {
   const [rounds, setRounds] = useState<number[][][]>([]);
   const [currentRound, setCurrentRound] = useState(1);
 
+  const [isPlaying, setIsPlaying] = useState(false);
+
   const shuffleRounds = () => {
     setRounds(generateRounds(participants));
     setCurrentRound(1);
