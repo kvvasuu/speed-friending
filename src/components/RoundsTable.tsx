@@ -8,23 +8,22 @@ const RoundsTable = ({ rounds, currentRound }: Props) => {
 
   return (
     <section id="rounds">
-      <table>
-        <thead>
-          <tr>
-            <td className="font-bold text-xl">Runda {currentRound}</td>
-          </tr>
-        </thead>
-        <tbody>
-          {rounds.map((round, index) => {
-            return (
-              <tr key={index}>
-                <td>{round[0]}</td>
-                <td>{round[1]}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <h3 className="font-bold text-2xl text-center">Runda {currentRound}</h3>
+      {rounds.map((round, index) => {
+        return (
+          <p key={index} className="h-10 text-lg">
+            <span className="font-semibold text-xl m-2 inline-block w-8 text-center">
+              {round[0] + 1}
+            </span>
+            <span>
+              <i className="fa-solid fa-right-long opacity-90"></i>
+            </span>
+            <span className="font-semibold text-xl m-2 inline-block w-8 text-center">
+              {round[1] + 1}
+            </span>
+          </p>
+        );
+      })}
     </section>
   );
 };

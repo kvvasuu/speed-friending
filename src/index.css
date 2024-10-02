@@ -7,22 +7,39 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color: rgba(255, 255, 255, 0.87);
+  color: #3f3f46;
   background-color: #242424;
+}
+html {
+  font-size: 16px;
+  height: 100%;
+  margin: 0;
+  background: url("./public/images/background.webp") no-repeat center center
+    fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 body {
   margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   min-width: 320px;
-  min-height: 100vh;
+  height: 100vh;
 }
 
 #root {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  height: 100%;
+  width: 100%;
+  padding: 4rem;
+}
+
+button.disabled {
+  opacity: 0.2;
+  pointer-events: none;
+  user-select: none;
 }

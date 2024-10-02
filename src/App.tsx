@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import RoundsTable from "./components/RoundsTable";
+import Controls from "./components/Controls";
 
 function generateRounds(numParticipants: number): number[][][] {
   if (numParticipants % 2 !== 0) {
@@ -36,6 +37,10 @@ function App() {
   const [rounds, setRounds] = useState<number[][][]>([]);
   const [currentRound, setCurrentRound] = useState(1);
 
+  useEffect(() => {
+    shuffleRounds();
+  }, [participants]);
+
   const shuffleRounds = () => {
     setRounds(generateRounds(participants));
     setCurrentRound(1);
@@ -53,40 +58,28 @@ function App() {
 
   return (
     <>
-      <h1 className="text-4xl m-4">Speed Friending</h1>
+      <h1 className="text-5xl m-4 font-bold uppercase text-yellow-600 drop-shadow-sm font-title tracking-widest select-none text-center">
+        Speed Friending
+      </h1>
       <input
         type="number"
-        className="w-1/2 bg-gray-400 rounded-md p-2 m-4 text-blue-950"
+        className="w-20 bg-gray-200 rounded-md p-2 m-4 text-blue-950 text-center"
         value={participants}
         min="2"
         max="100"
         onChange={(e) => setParticipants(Number(e.currentTarget.value))}
       />
 
-      <button
-        className="px-4 py-2 bg-amber-500 hover:bg-amber-700 transition-all text-blue-950 font-bold uppercase rounded-md mb-4"
-        onClick={shuffleRounds}
-      >
-        Generuj
-      </button>
       <RoundsTable
         rounds={rounds[currentRound - 1]}
         currentRound={currentRound}
       ></RoundsTable>
-      <div>
-        <button
-          className="px-4 py-2 bg-amber-500 hover:bg-amber-700 transition-all text-blue-950 font-bold uppercase rounded-md m-4"
-          onClick={prevRound}
-        >
-          Poprzednia runda
-        </button>
-        <button
-          className="px-4 py-2 bg-amber-500 hover:bg-amber-700 transition-all text-blue-950 font-bold uppercase rounded-md m-4"
-          onClick={nextRound}
-        >
-          Następna runda
-        </button>
-      </div>
+      <Controls
+        currentRound={currentRound}
+        roundsNumber={rounds.length}
+        prevRound={prevRound}
+        nextRound={nextRound}
+      ></Controls>
     </>
   );
 }
