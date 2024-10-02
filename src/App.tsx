@@ -38,8 +38,6 @@ function App() {
   const [rounds, setRounds] = useState<number[][][]>([]);
   const [currentRound, setCurrentRound] = useState(1);
 
-  const [isPlaying, setIsPlaying] = useState(false);
-
   const shuffleRounds = () => {
     setRounds(generateRounds(participants));
     setCurrentRound(1);
@@ -78,7 +76,7 @@ function App() {
               onChange={(e) => setParticipants(Number(e.currentTarget.value))}
             />
             <button
-              className="px-4 py-2 bg-amber-300 hover:bg-amber-400 transition-all text-blue-950 font-bold uppercase rounded-md m-4 select-none shadow-sm"
+              className="px-4 py-2 bg-amber-300 hover:bg-amber-400 hover:-translate-y-0.5 transition-all text-blue-950 font-bold uppercase rounded-md m-4 select-none shadow-sm"
               onClick={shuffleRounds}
             >
               Rozpocznij
