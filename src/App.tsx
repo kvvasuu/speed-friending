@@ -85,7 +85,7 @@ function App() {
               onChange={(e) => setParticipants(Number(e.currentTarget.value))}
             />
             <BasicButton
-              className="px-4 py-2 bg-amber-300 hover:bg-amber-400 transition-all text-blue-950 font-bold uppercase rounded-md m-4 select-none shadow-sm"
+              className="px-4 py-2 bg-amber-300 hover:bg-amber-400 hover:-translate-y-0.5 transition-all text-blue-950 font-bold uppercase rounded-md m-4 select-none shadow-sm"
               onClick={shuffleRounds}
             >
               Losuj
@@ -110,7 +110,7 @@ function App() {
             ></RoundsTable>
             {isPlaying === null ? (
               <BasicButton
-                className="px-4 py-2 bg-amber-300 hover:bg-amber-400 transition-all text-blue-950 font-bold uppercase rounded-md m-4 select-none shadow-sm"
+                className="px-4 py-2 bg-amber-300 hover:bg-amber-400 hover:-translate-y-0.5 transition-all text-blue-950 font-bold uppercase rounded-md m-4 select-none shadow-sm"
                 onClick={startGame}
               >
                 Start
