@@ -18,7 +18,7 @@ const Controls = ({
   nextRound,
 }: Props) => {
   return (
-    <div>
+    <div className="flex flex-col-reverse">
       <BasicButton
         disableButton={displayedRound <= 1 || isPlaying}
         onClick={prevRound}
