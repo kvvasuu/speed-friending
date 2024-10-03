@@ -3,6 +3,8 @@ import { useState } from "react";
 import RoundsTable from "./components/RoundsTable";
 import Controls from "./components/Controls";
 import Header from "./components/Header.tsx";
+import Timer from "./components/Timer.tsx";
+import BasicButton from "./components/BasicButton.tsx";
 
 function generateRounds(numParticipants: number): number[][][] {
   if (numParticipants % 2 !== 0) {
@@ -34,25 +36,30 @@ function generateRounds(numParticipants: number): number[][][] {
 }
 
 function App() {
-  const [participants, setParticipants] = useState(24);
+  const [participants, setParticipants] = useState<number>(24);
   const [rounds, setRounds] = useState<number[][][]>([]);
-  const [currentRound, setCurrentRound] = useState(1);
+  const [displayedRound, setDisplayedRound] = useState<number>(1);
+  const [currentRound, setCurrentRound] = useState<number>(0);
 
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState<boolean | null>(null);
 
   const shuffleRounds = () => {
     setRounds(generateRounds(participants));
-    setCurrentRound(1);
+  };
+
+  const startGame = () => {
+    setIsPlaying(true);
   };
 
   const nextRound = () => {
-    if (currentRound >= rounds.length) return;
-    setCurrentRound((prev) => prev + 1);
+    if (displayedRound >= rounds.length) return;
+    setDisplayedRound((prev) => prev + 1);
+    if (displayedRound === currentRound) setIsPlaying(true);
   };
 
   const prevRound = () => {
-    if (currentRound <= 1) return;
-    setCurrentRound((prev) => prev - 1);
+    if (displayedRound <= 1) return;
+    setDisplayedRound((prev) => prev - 1);
   };
 
   return (
@@ -77,25 +84,46 @@ function App() {
               max="100"
               onChange={(e) => setParticipants(Number(e.currentTarget.value))}
             />
-            <button
+            <BasicButton
               className="px-4 py-2 bg-amber-300 hover:bg-amber-400 transition-all text-blue-950 font-bold uppercase rounded-md m-4 select-none shadow-sm"
               onClick={shuffleRounds}
             >
-              Rozpocznij
-            </button>
+              Losuj
+            </BasicButton>
           </>
         ) : (
           <>
+            {isPlaying === null ? null : (
+              <Timer
+                isPlaying={isPlaying}
+                value={5}
+                handleTimerEnd={() => {
+                  setIsPlaying(false);
+                  setCurrentRound((round) => round + 1);
+                }}
+              ></Timer>
+            )}
+
             <RoundsTable
-              rounds={rounds[currentRound - 1]}
-              currentRound={currentRound}
+              rounds={rounds[displayedRound - 1]}
+              currentRound={displayedRound}
             ></RoundsTable>
-            <Controls
-              currentRound={currentRound}
-              roundsNumber={rounds.length}
-              prevRound={prevRound}
-              nextRound={nextRound}
-            ></Controls>
+            {isPlaying === null ? (
+              <BasicButton
+                className="px-4 py-2 bg-amber-300 hover:bg-amber-400 transition-all text-blue-950 font-bold uppercase rounded-md m-4 select-none shadow-sm"
+                onClick={startGame}
+              >
+                Start
+              </BasicButton>
+            ) : (
+              <Controls
+                isPlaying={isPlaying}
+                currentRound={displayedRound}
+                roundsNumber={rounds.length}
+                prevRound={prevRound}
+                nextRound={nextRound}
+              ></Controls>
+            )}
           </>
         )}
       </div>

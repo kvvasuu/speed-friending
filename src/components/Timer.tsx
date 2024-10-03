@@ -2,11 +2,18 @@ import { useState, useEffect } from "react";
 
 interface Props {
   value: number;
-  handleTimerEnd?: () => void;
+  handleTimerEnd: () => void;
+  isPlaying: boolean;
 }
 
-const CountdownTimer = ({ value, handleTimerEnd }: Props) => {
+const Timer = ({ value, handleTimerEnd, isPlaying }: Props) => {
   const [timeLeft, setTimeLeft] = useState<number>(value);
+
+  useEffect(() => {
+    if (isPlaying) {
+      setTimeLeft(value);
+    }
+  }, [isPlaying]);
 
   useEffect(() => {
     if (timeLeft > 0) {
@@ -27,4 +34,4 @@ const CountdownTimer = ({ value, handleTimerEnd }: Props) => {
   );
 };
 
-export default CountdownTimer;
+export default Timer;
