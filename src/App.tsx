@@ -5,6 +5,7 @@ import Controls from "./components/Controls";
 import Header from "./components/Header.tsx";
 import Timer from "./components/Timer.tsx";
 import BasicButton from "./components/BasicButton.tsx";
+import HomeScreen from "./components/HomeScreen.tsx";
 
 function generateRounds(numParticipants: number): number[][][] {
   if (numParticipants % 2 !== 0) {
@@ -40,6 +41,7 @@ function App() {
   const [rounds, setRounds] = useState<number[][][]>([]);
   const [displayedRound, setDisplayedRound] = useState<number>(1);
   const [currentRound, setCurrentRound] = useState<number>(0);
+  const [roundDuration, setRoundDuration] = useState<number>(60);
 
   const [isPlaying, setIsPlaying] = useState<boolean | null>(null);
 
@@ -72,31 +74,20 @@ function App() {
       >
         {rounds.length <= 0 ? (
           <>
-            <label className="text-slate-800 text-xl font-semibold">
-              Podaj liczbę uczestników:
-            </label>
-            <input
-              type="number"
-              className="w-20 bg-gray-200 rounded-md p-2 m-4 text-blue-950 text-center outline-none"
-              value={participants}
-              min="2"
-              step="2"
-              max="100"
-              onChange={(e) => setParticipants(Number(e.currentTarget.value))}
-            />
-            <BasicButton
-              className="px-4 py-2 bg-amber-300 hover:bg-amber-400 hover:-translate-y-0.5 transition-all text-blue-950 font-bold uppercase rounded-md m-4 select-none shadow-sm"
-              onClick={shuffleRounds}
-            >
-              Losuj
-            </BasicButton>
+            <HomeScreen
+              setParticipants={(e) => setParticipants(e)}
+              setRoundDuration={(e) => setRoundDuration(e)}
+              participants={participants}
+              roundDuration={roundDuration}
+              shuffleRounds={shuffleRounds}
+            ></HomeScreen>
           </>
         ) : (
           <>
             {isPlaying === null ? null : (
               <Timer
                 isPlaying={isPlaying}
-                value={5}
+                initialValue={roundDuration}
                 handleTimerEnd={() => {
                   setIsPlaying(false);
                   setCurrentRound((round) => round + 1);
@@ -130,7 +121,12 @@ function App() {
       {rounds.length > 0 && (
         <button
           className="px-4 py-2 text-xs  transition-all text-gray-800/80 hover:-translate-y-0.5 hover:bg-slate-100/50 font-bold uppercase rounded-md m-4 select-none"
-          onClick={() => setRounds([])}
+          onClick={() => {
+            setRounds([]);
+            setCurrentRound(0);
+            setDisplayedRound(1);
+            setIsPlaying(null);
+          }}
         >
           Wyjście
         </button>

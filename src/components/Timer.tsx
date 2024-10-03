@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
 
 interface Props {
-  value: number;
+  initialValue: number;
   handleTimerEnd: () => void;
   isPlaying: boolean;
 }
 
-const Timer = ({ value, handleTimerEnd, isPlaying }: Props) => {
-  const [timeLeft, setTimeLeft] = useState<number>(value);
+const Timer = ({ initialValue, handleTimerEnd, isPlaying }: Props) => {
+  const [timeLeft, setTimeLeft] = useState<number>(initialValue);
 
   useEffect(() => {
     if (isPlaying) {
-      setTimeLeft(value);
+      setTimeLeft(initialValue);
     }
   }, [isPlaying]);
 
