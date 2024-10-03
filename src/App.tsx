@@ -109,7 +109,8 @@ function App() {
             ) : (
               <Controls
                 isPlaying={isPlaying}
-                currentRound={displayedRound}
+                currentRound={currentRound}
+                displayedRound={displayedRound}
                 roundsNumber={rounds.length}
                 prevRound={prevRound}
                 nextRound={nextRound}

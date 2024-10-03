@@ -29,7 +29,9 @@ const HomeScreen = ({
         max="100"
         onChange={(e) => setParticipants(Number(e.currentTarget.value))}
       />
-      <label className="text-slate-800 text-xl font-semibold">Czas rudy:</label>
+      <label className="text-slate-800 text-xl font-semibold">
+        Czas rundy:
+      </label>
       <input
         type="number"
         className="w-20 bg-gray-200 rounded-md p-2 m-4 text-blue-950 text-center outline-none"

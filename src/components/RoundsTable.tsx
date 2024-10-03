@@ -8,12 +8,14 @@ const RoundsTable = ({ rounds, currentRound }: Props) => {
 
   return (
     <section id="rounds" className="w-full">
-      <h3 className="font-bold text-2xl text-center">Runda {currentRound}</h3>
+      <h3 className="font-bold text-2xl text-center select-none">
+        Runda {currentRound}
+      </h3>
       {rounds.map((round, index) => {
         return (
           <p
             key={index}
-            className="w-full h-10 flex justify-center items-center text-lg hover:bg-slate-100/20 select-none"
+            className="w-full h-10 flex justify-center items-center text-lg hover:bg-slate-100/20 select-none rounded-md"
           >
             <span className="font-semibold text-xl m-2 inline-block w-8 text-center">
               {round[0] + 1}
